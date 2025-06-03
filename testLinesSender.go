@@ -16,14 +16,7 @@ func (p TestLinesReq) Serialize() ([]byte, error) {
 }
 
 func NewTestLinesSender(opts LogSenderOpts) ISender {
-	var l *GenericSender
-	hdrs := opts.Headers
-	opts.Headers = map[string]string{}
-	for k, v := range hdrs {
-		opts.Headers[k] = v
-	}
-
-	l = &GenericSender{
+	l := &GenericSender{
 		LogSenderOpts: opts,
 		mtx:           sync.Mutex{},
 		rnd:           rand.New(rand.NewSource(time.Now().UnixNano())),
