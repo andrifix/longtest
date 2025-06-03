@@ -176,6 +176,18 @@ func writeTest() {
 			})
 			pqt.Run()
 		}
+		if strings.Contains(os.Getenv("MODE"), "J") {
+			fmt.Println("Run send test lines test")
+			pqt := NewTestLinesSender(LogSenderOpts{
+				ID:         "test-lines",
+				Containers: names,
+				Lines:      logs,
+				LinesPS:    10,
+				URL:        os.Getenv("URL"),
+				Headers:    headers,
+			})
+			pqt.Run()
+		}
 	}
 	t := time.NewTicker(time.Second)
 	go func() {
